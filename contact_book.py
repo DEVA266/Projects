@@ -1,4 +1,5 @@
 # This program is used to store search and delete the contact details
+contactBook = open("contact_details.csv","+a")
 
 def adding_contact(): 
     remaining_details = []
@@ -6,10 +7,15 @@ def adding_contact():
     try : 
         contatct_name = input("Enter the contact name : ").capitalize()
         contact_number = int(input("Enter the contact number : "))
+        contact_email = input("Enter the email address : ")
     except:
         print("You entered a wrong information \nplease enter it correctly".upper())
     else : 
-        pass
+        email_username = contact_email[0:contact_email.index("@")]
+        domain_name = contact_email[contact_email.index("@")+1]
+        contactBook.write(f"{contatct_name},{contact_number},{contact_email},{email_username},{domain_name}\n")
+
+        
 
 
 
