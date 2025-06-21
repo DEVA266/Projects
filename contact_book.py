@@ -1,11 +1,4 @@
 # This program is used to store search and delete the contact details
-import pandas as pd
-
-contactBook = open("contact_details.csv","a")
-# FIle pointer name
-
-Contact_Details = pd.read_csv("contact_details.csv")
-# The data Frame that hold the file pointer
 
 def adding_contact(): 
     print("\n adding contact \n".upper())
@@ -42,7 +35,7 @@ def search_contact():
                 searchingName = input("Enter the name :")
                 result = Contact_Details[Contact_Details["Name"]==searchingName]
                 if(result.empty):
-                    print("No Contacts are Found ")
+                    print("\n No Contacts are Found \n")
                     print("1.Search again ")
                     print("2.Exit")
                     try : 
@@ -78,7 +71,7 @@ def search_contact():
                 result = Contact_Details[Contact_Details["Mobile Number"]==searchingNumber]
 
                 if(result.empty):
-                    print("No Contacts are Found ")
+                    print("\n No Contacts are Found \n")
                     print("1.Search again ")
                     print("2.Exit")
 
@@ -113,7 +106,7 @@ def search_contact():
                 searchingEmail = input("Enter the email : ")
                 result = Contact_Details[Contact_Details["Email Address"]==searchingEmail]
                 if(result.empty):
-                    print("No Contacts are Found ")
+                    print("\n No Contacts are Found \n")
                     print("1.Search again ")
                     print("2.Exit")
 
@@ -148,7 +141,7 @@ def search_contact():
                 searchingUsername = input("Enter the username : ")
                 result = Contact_Details[Contact_Details["Email Username"]==searchingUsername]
                 if(result.empty):
-                    print("No Contacts are Found ")
+                    print("\n No Contacts are Found \n")
                     print("1.Search again ")
                     print("2.Exit")
 
@@ -190,14 +183,86 @@ def search_contact():
             return
 
 def delete_contact():
-    pass
+    print("\n Deleting contact \n".upper())
+    print("Select an option below : ")
+    print("1.Delete by Name ")
+    print("2.Delete by Number ")
+    print("3.Delete by Email")
+    print("4.Delete by Username ")
+    print("5.Go Back")
+
+    try : 
+        option = int(input("Enter Your choice : "))
+    except:
+        print("Invalid Option !")
+        return
+    else :
+        try :
+            if (option == 1):
+                deletingName = input("Enter the Contact name : ")
+                # df.drop(df[df['Name'] == name_to_delete].index, inplace=True)
+                if deletingName not in Contact_Details["Name"].values:
+                    print("\n The Name is not Found in the Contact book !\n")
+                else :
+                    Contact_Details.drop(Contact_Details[Contact_Details["Name"] == deletingName].index, inplace=True)
+                    Contact_Details.to_csv("contact_details.csv",index=False)
+                    print(f"{deletingName} is successfully deleted from the Contact Book")
+                    return
+
+            elif(option == 2):
+                deletingNumber = int(input("Enter the Contact Number : "))
+                if deletingNumber not in Contact_Details["Mobile Number"].values:
+                    print("\n The Number is not Found in the Contact book !\n")
+                else :
+                    Contact_Details.drop(Contact_Details[Contact_Details["Mobile Number"] == deletingNumber].index, inplace=True)
+                    Contact_Details.to_csv("contact_details.csv",index=False)
+                    print(f"{deletingNumber} is successfully deleted from the Contact Book")
+                    return
+                
+            elif(option == 3):
+                deletingEmail = input("Enter the Email : ")
+                if deletingEmail not in Contact_Details["Email Address"].values:
+                    print("\n The Email is not Found in the Contact book !\n")
+                else :
+                    Contact_Details.drop(Contact_Details[Contact_Details["Email Address"] == deletingEmail].index, inplace=True)
+                    Contact_Details.to_csv("contact_details.csv",index=False)
+                    print(f"{deletingEmail} is successfully deleted from the Contact Book")
+                    return
+                
+            elif(option == 4):
+                deletingUsername = input("Enter the Username : ")
+                if deletingUsername not in Contact_Details["Email Username"].values:
+                    print("\nThe Username is not Found in the Contact book !\n")
+                else :
+                    Contact_Details.drop(Contact_Details[Contact_Details["Email Username"] == deletingUsername].index, inplace=True)
+                    Contact_Details.to_csv("contact_details.csv",index=False)
+                    print(f"{deletingUsername} is successfully deleted from the Contact Book")
+                    return
+                
+            elif(option == 5):
+                print("\nGoing Back to the Previous Menu !\n")
+                return
+            else :
+                print("Invalid Option !")
+                return
+        except :
+            print("Error Occurred !")
+            return
 
 def viewContact():
     print(Contact_Details.head())
 
+import pandas as pd
+
+contactBook = open("contact_details.csv","a")
+# FIle pointer name
+
+Contact_Details = pd.read_csv("contact_details.csv")
+# The data Frame that hold the file pointer
+
 
 while True : 
-    print("Welcome User 🙏".upper())
+    print("\n  Welcome User 🙏  \n".upper())
     print("1.Add a new contact")
     print("2.Search in contact")
     print("3.Delete a contact")
@@ -221,6 +286,3 @@ while True :
             break
         else : 
             print(" \n Please enter an valid option !")
-
-
-
