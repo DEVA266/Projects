@@ -250,7 +250,7 @@ def delete_contact():
             return
 
 def viewContact():
-    print(Contact_Details.head())
+    print(Contact_Details)
 
 import pandas as pd
 
