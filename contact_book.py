@@ -13,7 +13,6 @@ def adding_contact():
     else : 
         contactBook.write(f"{contatct_name},{contact_number},{contact_email},{email_username},{domain_name}\n")
 
-        
 def search_contact():
     print("\n Searchiing contact \n ".upper())
     print("Select from below options : ")
